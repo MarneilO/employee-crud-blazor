@@ -12,6 +12,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<EmployeeService>();
 builder.Services
     .AddBlazorise();
+
 //Connection to the Database
 builder.Services.AddDbContext<EmployeeDbContext>(item => item.UseSqlServer(builder.Configuration.GetConnectionString("Default Connection")));
 

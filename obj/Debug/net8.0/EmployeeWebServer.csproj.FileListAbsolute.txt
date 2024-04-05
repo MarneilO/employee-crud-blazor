@@ -145,3 +145,4 @@ C:\Users\morosca\source\repos\EmployeeWebServer\EmployeeWebServer\bin\Debug\net8
 C:\Users\morosca\source\repos\EmployeeWebServer\EmployeeWebServer\bin\Debug\net8.0\Microsoft.Extensions.Logging.Abstractions.dll
 C:\Users\morosca\source\repos\EmployeeWebServer\EmployeeWebServer\bin\Debug\net8.0\Microsoft.Extensions.Options.dll
 C:\Users\morosca\source\repos\EmployeeWebServer\EmployeeWebServer\bin\Debug\net8.0\Microsoft.JSInterop.dll
+C:\Users\morosca\source\repos\EmployeeWebServer\EmployeeWebServer\obj\Debug\net8.0\EmployeeWebServer.sourcelink.json
