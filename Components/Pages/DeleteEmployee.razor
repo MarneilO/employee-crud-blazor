@@ -1,0 +1,63 @@
+﻿@page "/DeleteEmployee/{Id}"
+
+@using EmployeeWebServer.Data
+@inject EmployeeService employeeService
+@inject NavigationManager NavigationManager
+
+<h3> Employee</h3>
+<hr />
+
+<form>
+    <div class="row">
+        <div class="col-md-8">
+            <table class="table table-bordered table-striped mb-0">
+                <thead class="table-header">
+                    <tr>
+                        <th>Employee No</th>
+                        <th>Employee Name</th>
+                        <th>Address</th>
+                        <th>Email</th>
+                        <th>Phone Number</th>
+                        <th>Designation</th>
+                    </tr>
+                </thead>
+                <tbody>
+                        <tr>
+                            <td>@obj.Id</td>
+                            <td>@obj.FullName</td>
+                            <td>@obj.Address</td>
+                            <td>@obj.Email</td>
+                            <td>@obj.PhoneNumber</td>
+                            <td>@obj.Designation</td>
+                        </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="row">
+        <div class="button-below">
+            <input type="button" class="delete-employee-btn" @onclick="@DeleteEmployeeRecord" value="Delete Employee" />
+            <input type="button" class="cancel-employee-btn" @onclick="@Cancel" value="Cancel" />
+        </div>
+    </div>
+</form>
+
+@code {
+    [Parameter]
+    public string Id { get; set; }
+    Employee obj = new Employee();
+
+    protected override async Task OnInitializedAsync()
+    {
+        obj = await Task.Run(() => employeeService.GetEmployeeById(Convert.ToInt32(Id)));
+    }
+    protected async void DeleteEmployeeRecord()
+    {
+        await employeeService.DeleteEmployeeData(obj);
+        NavigationManager.NavigateTo("Employees");
+    }
+    protected async void Cancel()
+    {
+        NavigationManager.NavigateTo("Employees");
+    }
+}

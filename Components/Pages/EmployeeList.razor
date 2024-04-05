@@ -1,0 +1,76 @@
+﻿@page "/Employees"
+@using EmployeeWebServer.Data
+@inject EmployeeService employeesService
+
+<div class="header">
+    <div>
+        <h3>List of Employee</h3>
+    </div>
+    <div class="header-add-btn">
+        <a class="add-btn" href="AddNewEmployee">
+           <span class="fa-solid fa-user-plus" aria-hidden="true"> Add Employee</span>
+        </a>
+    </div>
+</div>
+
+    
+
+
+
+@if (EmpObj is null)
+{
+    <div class="ring">
+        Loading
+        <span class="loading"></span>
+    </div>
+}
+else
+{
+    <div class="table-dark">
+        <table class="table table-bordered table-striped mb-0">
+            <thead class="table-header">
+                <tr>
+                    <th>Employee No</th>
+                    <th>Employee Name</th>
+                    <th>Address</th>
+                    <th>Email</th>
+                    <th>Phone Number</th>
+                    <th>Designation</th>
+                    <th>Actions</th>
+                </tr>
+            </thead>
+            <tbody>
+                @foreach (var emp in EmpObj)
+                {
+                    <tr>
+                        <td>@emp.Id</td>
+                        <td>@emp.FullName</td>
+                        <td>@emp.Address</td>
+                        <td>@emp.Email</td>
+                        <td>@emp.PhoneNumber</td>
+                        <td>@emp.Designation</td>
+                        <td class="action-btn">
+                            <a class="edit-btn" href="EditEmployee/@emp.Id">
+                                <span class="fa-solid fa-pen-to-square" aria-hidden="true"></span>
+                            </a>
+                            <a class="delete-btn" href="DeleteEmployee/@emp.Id">
+                                <span class="fa-solid fa-trash-can" aria-hidden="true"></span>
+                            </a>
+                        </td>
+                    </tr>
+                }
+            </tbody>
+        </table>
+    </div>
+}
+
+
+
+@code {
+    List<Employee> EmpObj;
+
+    protected override async Task OnInitializedAsync()
+    {
+        EmpObj = await Task.Run(() => employeesService.GetAllEmployees());
+    }
+}
