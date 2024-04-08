@@ -6,57 +6,127 @@
 @using EmployeeWebServer.Components.Pages
 <link href="~/bootstrap/EditEmployeelist.css" rel="stylesheet" />
 
-<h3>Edit Employee</h3>
+<style>
+
+    .edit-employee-btn {
+        background-color: #008000;
+        border: none;
+        border-radius:5px;
+        color: white;
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .edit-employee-btn:hover{
+        box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    .cancel-edit-employee-btn {
+        background-color: #ff3333;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    
+    .cancel-edit-employee-btn:hover{
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    .button-below {
+        margin-top: 20px;
+        margin-left: 40px;
+    }
+    .title{
+        margin-top: 15px;
+    }
+
+    .flex-1 {
+        display: flex;
+        justify-content: space-between;
+    }
+
+    .flex-2 {
+        display: flex;
+        justify-content:flex-start;
+    }
+    .margin-textbox{
+        margin-left:20px;
+    }
+
+</style>
+
+<h3 class=" title">Edit Employee</h3>
 <hr />
 
 
 <form>
     <div class="row">
         <div class="col-md-8">
-            <div class="for-group">
-                <label for="Id" class="control-label">Employee No</label>
-                <input form="Id" class="form-control" @bind="@obj.Id" />
+            <div class="flex-1">
+                <div class="for-group">
+                    <label for="Id" class="control-label">Employee No</label>
+                    <input form="Id" class="form-control" @bind="@obj.Id" />
+                </div>
+                <div class="for-group">
+                    <label for="FirstName" class="control-label">First Name</label>
+                    <input form="FirstName" class="form-control" @bind="@obj.FirstName" />
+                </div>
+                <div class="for-group">
+                    <label for="MiddleName" class="control-label">Middle Name</label>
+                    <input form="MiddleName" class="form-control" @bind="@obj.MiddleName" />
+                </div>
+                <div class="for-group">
+                    <label for="LastName" class="control-label">Last Name</label>
+                    <input form="LastName" class="form-control" @bind="@obj.LastName" />
+                </div>
+                <div class="for-group">
+                    <label for="PostalCode" class="control-label">Postal Code</label>
+                    <input form="PostalCode" class="form-control" @bind="@obj.PostalCode" />
+                </div>
             </div>
-            <div class="for-group">
-                <label for="FirstName" class="control-label">First Name</label>
-                <input form="FirstName" class="form-control" @bind="@obj.FirstName" />
-            </div>
-            <div class="for-group">
-                <label for="MiddleName" class="control-label">Middle Name</label>
-                <input form="MiddleName" class="form-control" @bind="@obj.MiddleName" />
-            </div>
-            <div class="for-group">
-                <label for="LastName" class="control-label">Last Name</label>
-                <input form="LastName" class="form-control" @bind="@obj.LastName" />
-            </div>
-            <div class="for-group">
-                <label for="PostalCode" class="control-label">Postal Code</label>
-                <input form="PostalCode" class="form-control" @bind="@obj.PostalCode" />
-            </div>
-            <div class="for-group">
-                <label for="Address" class="control-label">Address</label>
-                <input form="Address" class="form-control" @bind="@obj.Address" />
-            </div>
-            <div class="for-group">
-                <label for="Email" class="control-label">Email</label>
-                <input form="Email" class="form-control" @bind="@obj.Email" />
-            </div>
-            <div class="for-group">
-                <label for="PhoneNumber" class="control-label">Phone Number</label>
-                <input form="PhoneNumber" class="form-control" @bind="@obj.PhoneNumber" />
-            </div>
-            <div class="for-group">
-                <label for="Designation" class="control-label">Designation</label>
-                <input form="Designation" class="form-control" @bind="@obj.Designation" />
+            <div class="flex-2">
+                <div class="for-group">
+                    <label for="Address" class="control-label">Address</label>
+                    <input form="Address" class="form-control" @bind="@obj.Address" />
+                </div>
+                <div class="for-group margin-textbox">
+                    <label for="Email" class="control-label">Email</label>
+                    <input form="Email" class="form-control" @bind="@obj.Email" />
+                </div>
+                <div class="for-group margin-textbox">
+                    <label for="PhoneNumber" class="control-label">Phone Number</label>
+                    <input form="PhoneNumber" class="form-control" @bind="@obj.PhoneNumber" />
+                </div>
+                <div class="for-group margin-textbox">
+                    <label for="Designation" class="control-label">Designation</label>
+                    <input form="Designation" class="form-control" @bind="@obj.Designation" />
+                </div>
+
+                <div class="row">
+                    <div class="button-below">
+                        <input type="button" class="edit-employee-btn" @onclick="@UpdateEmployee" value="Update" />
+                        <input type="button" class="cancel-edit-employee-btn" @onclick="@Cancel" value="Cancel" />
+                    </div>
+                </div>
             </div>
         </div>
     </div>
-    <div class="row">
-        <div class="button-below">
-            <input type="button" class="edit-employee-btn" @onclick="@UpdateEmployee" value="Update Employee" />
-            <input type="button" class="cancel-edit-employee-btn" @onclick="@Cancel" value="Cancel" />
-        </div>
-    </div>
+
 </form>
 
 @code {
