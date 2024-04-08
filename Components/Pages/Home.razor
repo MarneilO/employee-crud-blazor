@@ -2,14 +2,50 @@
 
 <PageTitle>List of Employee</PageTitle>
 
+<style>
 
+    .view-list-btn {
+        background-color: #005ce6;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 8px 32px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 15px;
+    }
 
+    .view-list-btn:hover {
+            background-color: #0066ff;
+            color: white;
+            box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
+        }
+
+    .home-title {
+        margin-top: 10%;
+        font-size: 80px;
+    }
+
+    .title {
+        margin-top: 10%;
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+
+    .btn-home {
+        display: flex;
+        justify-content: center;
+        align-items: center;
+    }
+</style>
 
 <div class="title">
-    <h1 class="klentek">List of Employee</h1>
+    <h1 class="home-title">List of Employee</h1>
 </div>
 <div class="btn-home">
-    <a class="edit-btn" href="Employees">
+    <a class="view-list-btn" href="Employees">
         <span aria-hidden="true">View List</span>
     </a>
 </div>
