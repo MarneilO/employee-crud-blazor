@@ -4,6 +4,51 @@
 @inject EmployeeService employeeService
 @inject NavigationManager NavigationManager
 
+<style>
+
+    .addemployee-save-btn{
+        background-color: #005ce6;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .addemployee-save-btn:hover{
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+
+    .addemployee-cancel-btn{
+        background-color: #ff3333;
+        border: none;
+        border-radius: 5px;
+        color: white;
+        padding: 8px 20px;
+        text-align: center;
+        text-decoration: none;
+        display: inline-block;
+        font-size: 16px;
+        margin: 4px 2px;
+        cursor: pointer;
+        -webkit-transition-duration: 0.4s; /* Safari */
+        transition-duration: 0.4s;
+    }
+    .addemployee-cancel-btn:hover{
+            box-shadow: 0 5px 5px 0 rgba(0,0,0,0.24),0 17px 50px 0 rgba(0,0,0,0.19);
+    }
+    .button-below{
+        margin-top:10px;
+    }
+
+</style>
+
 <h3>Add New Employee</h3>
 <hr />
 
@@ -50,8 +95,8 @@
     </div>
     <div class="row">
         <div class="button-below">
-            <input type="button" class="btn btn-primary" @onclick="@CreateNewEmployee" value="Save Employee" />
-            <input type="button" class="btn btn-danger" @onclick="@Cancel" value="Cancel" />
+            <input type="button" class="addemployee-save-btn" @onclick="@CreateNewEmployee" value="Add" />
+            <input type="button" class="addemployee-cancel-btn" @onclick="@Cancel" value="Cancel" />
         </div>
     </div>
 </form>
