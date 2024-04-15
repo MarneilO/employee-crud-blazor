@@ -1,8 +1,10 @@
 ﻿@page "/Employees"
+@inherits LayoutComponentBase
 @using EmployeeWebServer.Data
 @inject EmployeeService employeesService
 
 <style>
+
     .ring {
         margin-top: 20%;
         position: absolute;
@@ -138,6 +140,7 @@
             color: white;
             box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
         }
+
     .delete-btn {
         background-color: #ff0000;
         border: none;
@@ -161,7 +164,8 @@
         display: flex;
         justify-content: center;
     }
-    .home-btn{
+
+    .home-btn {
         background-color: lightgray;
         border: none;
         border-radius: 5px;
@@ -174,28 +178,25 @@
         margin-left: 8px;
     }
 
-    .home-btn:hover {
-        box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
-    }
-    .hedaer-btn{
+        .home-btn:hover {
+            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
+        }
+
+    .hedaer-btn {
         margin-top: 10px;
         margin-bottom: 10px;
         display: flex;
         justify-content: flex-start;
     }
-    .title-emplist{
-        margi
-    }
 
-
-</style> 
+</style>
 
 <div class="header">
     <div>
         <h3 class="title-emplist">List of Employee</h3>
     </div>
     <div>
-        <a class="home-btn" href="/">
+        <a class="home-btn" href="/AddNewEmployee">
             <span class="fa-solid fa-user-plus" style="color: #404040;" aria-hidden="true"> </span>
         </a>
         <a class="home-btn" href="/">
