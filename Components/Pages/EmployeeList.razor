@@ -166,21 +166,8 @@
     }
 
     .home-btn {
-        background-color: lightgray;
-        border: none;
-        border-radius: 5px;
-        color: white;
-        padding: 8px 15px;
-        text-align: center;
-        text-decoration: none;
-        display: inline-block;
-        font-size: 15px;
-        margin-left: 8px;
+        margin-left: 10px;
     }
-
-        .home-btn:hover {
-            box-shadow: 0 2px 4px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
-        }
 
     .hedaer-btn {
         margin-top: 10px;
@@ -188,21 +175,24 @@
         display: flex;
         justify-content: flex-start;
     }
+    
+    .buttons-top {
+        display:flex;
+    }
 
 </style>
 
 <div class="header">
     <div>
-        <h3 class="title-emplist">List of Employee</h3>
+        <MudText Typo="Typo.h4">List Of Employee</MudText>
     </div>
-    <div>
-        <a class="home-btn" href="/AddNewEmployee">
-            <span class="fa-solid fa-user-plus" style="color: #404040;" aria-hidden="true"> </span>
-        </a>
-        <a class="home-btn" href="/">
-            <span class="fa-solid fa-house" style="color: #404040;" aria-hidden="true"> </span>
-        </a>
-     
+    <div class="buttons-top">
+        <div>
+            <MudIconButton Icon="fa-solid fa-user-plus " Variant="Variant.Filled" Color="Color.Default" Size="Size.Medium" Href="/AddNewEmployee"></MudIconButton>
+        </div>
+        <div class="home-btn">
+            <MudIconButton Icon="fa-solid fa-house " Variant="Variant.Filled" Color="Color.Default" Size="Size.Medium" Href="/"></MudIconButton>
+        </div>
     </div>
 </div>
 

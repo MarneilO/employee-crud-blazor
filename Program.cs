@@ -3,6 +3,7 @@ using EmployeeWebServer.Components;
 using EmployeeWebServer.Context;
 using EmployeeWebServer.Data;
 using Microsoft.EntityFrameworkCore;
+using MudBlazor;
 using MudBlazor.Services;
 
 var builder = WebApplication.CreateBuilder(args);
@@ -14,6 +15,18 @@ builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddBlazorise();
 builder.Services.AddMudServices();
 
+builder.Services.AddMudServices(config =>   
+{
+    config.SnackbarConfiguration.PositionClass = Defaults.Classes.Position.BottomRight;
+
+    config.SnackbarConfiguration.PreventDuplicates = false;
+    config.SnackbarConfiguration.NewestOnTop = false;
+    config.SnackbarConfiguration.ShowCloseIcon = true;
+    config.SnackbarConfiguration.VisibleStateDuration = 3000;
+    config.SnackbarConfiguration.HideTransitionDuration = 500;
+    config.SnackbarConfiguration.ShowTransitionDuration = 500;
+    config.SnackbarConfiguration.SnackbarVariant = Variant.Filled;
+});
 //Connection to the Database
 builder.Services.AddDbContext<EmployeeDbContext>(item => item.UseSqlServer(builder.Configuration.GetConnectionString("Default Connection")));
 
