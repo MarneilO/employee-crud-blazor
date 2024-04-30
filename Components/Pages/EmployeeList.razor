@@ -196,7 +196,7 @@
     </div>
 </div>
 
-    
+
 @if (EmpObj is null)
 {
     <div class="ring">
@@ -206,6 +206,7 @@
 }
 else
 {
+   
     <div class="mud-table-root">
         <table class="table table-bordered table-striped mb-0">
             <thead class="table-header">
@@ -253,4 +254,5 @@ else
     {
         EmpObj = await Task.Run(() => employeesService.GetAllEmployees());
     }
+
 }

@@ -106,16 +106,21 @@
             </div>
         </div>
     </div>
+
     <div class="row">
         <div class="button-below">
             <input type="button" class="addemployee-save-btn" @onclick="@CreateNewEmployee" value="Add" />
-            <MudAlert Severity="Severity.Info">The reactor was fired up successfully</MudAlert>
+           
             <input type="button" class="addemployee-cancel-btn" @onclick="@Cancel" value="Cancel" />
         </div>
     </div>
 </form>
 
+
+
+
 @code {
+
     Employee obj = new Employee();
 
     protected async void CreateNewEmployee()

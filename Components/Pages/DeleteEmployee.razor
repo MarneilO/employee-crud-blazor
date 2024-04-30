@@ -3,6 +3,11 @@
 @using EmployeeWebServer.Data
 @inject EmployeeService employeeService
 @inject NavigationManager NavigationManager
+@using MudBlazor;
+@using MudBlazor.Services;
+@using MudBlazor.Dialog
+@inject IDialogService DialogService
+
 
 <style>
     .delete-employee-btn {
@@ -64,13 +69,16 @@
     </div>
     <div class="row">
         <div class="button-below">
-            <input type="button" class="delete-employee-btn" @onclick="@DeleteEmployeeRecord" value="Delete" />
+            <MudButton @onclick="DeleteEmployeeRecord" Variant="Variant.Filled" Color="Color.Error">Delete Records</MudButton>
+            @* <input type="button" class="delete-employee-btn" @onclick="@DeleteEmployeeRecord" value="Delete" /> *@
             <input type="button" class="cancel-employee-btn" @onclick="@Cancel" value="Cancel" />
         </div>
     </div>
 </form>
 
+
 @code {
+
     [Parameter]
     public string Id { get; set; }
     Employee obj = new Employee();
@@ -88,4 +96,7 @@
     {
         NavigationManager.NavigateTo("Employees");
     }
+
+  
+
 }
