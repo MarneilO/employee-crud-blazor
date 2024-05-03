@@ -22,7 +22,12 @@
   </ItemGroup>
 
   <ItemGroup>
-    <Folder Include="Components\Layout\img\" />
+    <Folder Include="wwwroot\img\" />
+  </ItemGroup>
+
+  <ItemGroup>
+    <None Include="wwwroot\img\background.jpg" />
+    <None Include="wwwroot\img\bg1.jpg" />
   </ItemGroup>
 
 </Project>

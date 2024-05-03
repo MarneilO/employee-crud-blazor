@@ -4,11 +4,12 @@
     position: relative;
     display: flex;
     flex-direction: column;
-    background-image: url(img/bg.jpg);
+
 }
 
 main {
     flex: 1;
+    height: 1000px;
 }
 
 .sidebar {

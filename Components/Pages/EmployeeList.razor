@@ -120,15 +120,13 @@
     .table-header {
         text-align: center;
         color: white;
-        background-color: #008000;
+        background-color: #008fb3;
     }
 
     .edit-btn {
-        background-color: #005ce6;
         border: none;
         border-radius: 5px;
-        color: white;
-        padding: 8px 20px;
+        padding: 10px 15px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -136,17 +134,14 @@
     }
 
         .edit-btn:hover {
-            background-color: #0066ff;
-            color: white;
-            box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
+            background-color: #cccccc;
+            box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
         }
 
     .delete-btn {
-        background-color: #ff0000;
         border: none;
         border-radius: 5px;
-        color: white;
-        padding: 8px 20px;
+        padding: 10px 15px;
         text-align: center;
         text-decoration: none;
         display: inline-block;
@@ -155,9 +150,8 @@
     }
 
         .delete-btn:hover {
-            background-color: #ff1a1a;
-            color: white;
-            box-shadow: 0 2px 6px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
+            background-color: #cccccc;
+            box-shadow: 0 0px 0px 0 rgba(0,0,0,0.24),0 3px 7px 0 rgba(0,0,0,0.19);
         }
 
     .action-btn {
@@ -180,72 +174,102 @@
         display:flex;
     }
 
+    .NavBar {
+        background-color: #006680;
+    }
+
+    .SideBar {
+        background-color: #008fb3;
+        color: white;
+    }
+    .table-data{
+        margin-top:15px;
+        margin-left:15px;
+        margin-right:15px;
+    }
+
+    thead{
+        font-weight:800;
+        background-color: #008fb3;
+        color:white;
+    }
+    .main-content{
+        margin-top:0px;
+    }
+
 </style>
 
-<div class="header">
-    <div>
-        <MudText Typo="Typo.h4">List Of Employee</MudText>
-    </div>
-    <div class="buttons-top">
-        <div>
-            <MudIconButton Icon="fa-solid fa-user-plus " Variant="Variant.Filled" Color="Color.Default" Size="Size.Medium" Href="/AddNewEmployee"></MudIconButton>
-        </div>
-        <div class="home-btn">
-            <MudIconButton Icon="fa-solid fa-house " Variant="Variant.Filled" Color="Color.Default" Size="Size.Medium" Href="/"></MudIconButton>
-        </div>
-    </div>
-</div>
 
-
-@if (EmpObj is null)
-{
-    <div class="ring">
-        Loading
-        <span class="loading"></span>
-    </div>
-}
-else
-{
-   
-    <div class="mud-table-root">
-        <table class="table table-bordered table-striped mb-0">
-            <thead class="table-header">
-                <tr>
-                    <th>Employee No</th>
-                    <th>Employee Name</th>
-                    <th>Address</th>
-                    <th>Email</th>
-                    <th>Phone Number</th>
-                    <th>Designation</th>
-                    <th>Actions</th>
-                </tr>
-            </thead>
-            <tbody>
-                @foreach (var emp in EmpObj)
+<MudLayout>
+    <MudAppBar Elevation="1" Class="NavBar">
+        <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+        <MudInputLabel>List of Employee</MudInputLabel>
+        <MudSpacer />
+        <MudIconButton Icon="@Icons.Material.Filled.Home" Href="/" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.PersonAdd" Href="/AddNewEmployee" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Target="_blank" />
+    </MudAppBar>
+    <MudDrawer @bind-Open="@open" Elevation="1" Class="SideBar">
+        <MudDrawerHeader>
+            <MudText Typo="Typo.h6">List of Employee</MudText>
+        </MudDrawerHeader>
+        <MudNavMenu>
+            <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/Employees">List Of Employee</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/driver-schedule">Driver's Schedule</MudNavLink>
+        </MudNavMenu>
+    </MudDrawer>
+    <MudMainContent>
+        <MudGrid>
+            <MudItem xs="12">
+                @if (EmpObj is null)
                 {
-                    <tr>
-                        <td>@emp.Id</td>
-                        <td>@emp.FullName</td>
-                        <td>@emp.Address</td>
-                        <td>@emp.Email</td>
-                        <td>@emp.PhoneNumber</td>
-                        <td>@emp.Designation</td>
-                        <td class="action-btn">
-                            <a class="edit-btn" href="EditEmployee/@emp.Id">
-                                <span class="fa-solid fa-pen-to-square" aria-hidden="true"></span>
-                            </a>
-                            <a class="delete-btn" href="DeleteEmployee/@emp.Id">
-                                <span class="fa-solid fa-trash-can" aria-hidden="true"></span>
-                            </a>
-                        </td>
-                    </tr>
+                    <div class="ring">
+                        Loading
+                        <span class="loading"></span>
+                    </div>
                 }
-            </tbody>
-        </table>
-    </div>
-}
-
-
+                else
+                {
+                    <MudSimpleTable Style="overflow-x:auto" Bordered Striped Hover="true" Class="table-data">
+                        <thead>
+                            <MudTr>
+                                <MudTh Style=" padding:10px; text-align:center;">Employee No</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Employee Name</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Address</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Email</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Phone Number</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Desifnation</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center;">Actions</MudTh>
+                            </MudTr>
+                        </thead>
+                        <tbody>
+                            @foreach (var emp in EmpObj)
+                            {
+                                <MudTr>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.Id</MudTd>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.FullName</MudTd>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.Address</MudTd>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.Email</MudTd>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.PhoneNumber</MudTd>
+                                    <MudTd Style=" padding:10px; text-align:center;">@emp.Designation</MudTd>
+                                    <MudTd Class="action-btn" Style=" padding:10px; text-align:center;">
+                                        <a class="edit-btn" href="EditEmployee/@emp.Id">
+                                            <span class="fa-solid fa-pen-to-square fa-xl" style="color: #00328a" aria-hidden="true"></span>
+                                        </a>
+                                        <a class="delete-btn" href="DeleteEmployee/@emp.Id">
+                                            <span class="fa-solid fa-trash-can fa-xl" style="color: #bd0000" aria-hidden="true"></span>
+                                        </a>
+                                    </MudTd>
+                                </MudTr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                }
+            </MudItem>
+        </MudGrid>
+    </MudMainContent>
+</MudLayout>
 
 @code {
     List<Employee> EmpObj;
@@ -254,5 +278,10 @@ else
     {
         EmpObj = await Task.Run(() => employeesService.GetAllEmployees());
     }
+    bool open = false;
 
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
 }

@@ -1,0 +1,188 @@
+﻿@page "/driver-schedule"
+@inherits LayoutComponentBase
+@using EmployeeWebServer.Data
+@inject EmployeeService employeesService
+
+<style>
+    h3{
+        margin-top:20px;
+        font-weight:800;
+    }
+    .textfield{
+        width:300px;
+        display:flex;
+        flex-direction:row;
+        flex-wrap:wrap;
+        justify-content:center;
+        align-items:center;
+        padding:0;
+    }
+    .table
+    {
+        border-color: white;
+        width:105%;
+        margin-top:2px;
+    }
+
+    .table-header{
+        width:105%;
+        background-color: #008fb3;
+        color: white;
+        text-align:center;
+    }
+    .table-header .stops{
+           font-weight:800;
+    } 
+    .table-header .type{
+            font-weight:800;
+        }
+    tbody{
+        background-color:white;
+
+    }
+
+    .display-flex{
+        display:flex;
+        justify-content:space-around;
+    }
+
+    .NavBar{
+        background-color: #006680;
+    }
+    .SideBar{
+        background-color: #008fb3;
+        color:white;
+    }
+    .table-data{
+        margin-top:15px;
+    }
+
+    .input-data{
+        margin-top:20px;
+    }
+
+    .NavBar {
+        background-color: #006680;
+    }
+
+    .SideBar {
+        background-color: #008fb3;
+        color: white;
+    }
+    MudTh{
+        padding: 10px;
+        text-align: center;
+        font-weight:900;
+    }
+</style>
+
+<body>
+    <MudLayout>
+        <MudAppBar Elevation="1" Class="NavBar">
+            <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
+            <MudInputLabel>Driver's Schedule</MudInputLabel>
+            <MudSpacer />
+            <MudIconButton Icon="@Icons.Material.Filled.Home" Href="/" Color="Color.Inherit" Target="_blank" />
+            <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Target="_blank" />
+        </MudAppBar>
+        <MudDrawer @bind-Open="@open" Elevation="1" Class="SideBar">
+            <MudDrawerHeader>
+                <MudText Typo="Typo.h6">Driver's Schedule'</MudText>
+            </MudDrawerHeader>
+            <MudNavMenu>
+                <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/Employees">List Of Employee</MudNavLink>
+                <MudNavLink Match="NavLinkMatch.All" Href="/driver-schedule">Driver's Schedule</MudNavLink>
+            </MudNavMenu>
+        </MudDrawer>
+        <MudMainContent Class="main-content">
+            <MudGrid Style="margin:5px;">
+                <MudItem xs="3" Class="input-data">
+                    <MudTextField ShrinkLabel @bind-Value="Route" Label="Route" Variant="Variant.Filled" Class="route"></MudTextField>
+                    <MudTextField T="string" Label="Default Start Time" InputType="InputType.Time" Variant="Variant.Filled " Class="default" />
+                    <MudSelect T="Location" Label="Start Location" Variant="Variant.Filled" AnchorOrigin="Origin.BottomCenter">
+                        <MudSelectItem Value="@(new Location("Lahug"))" />
+                        <MudSelectItem Value="@(new Location("Carbon"))" />
+                        <MudSelectItem Value="@(new Location("Apas"))" />
+                        <MudSelectItem Value="@(new Location("Colon"))" />
+                    </MudSelect>
+                </MudItem>
+                <MudItem xs="9" Class="table-data">
+                    <MudSimpleTable Style="overflow-x:auto; margin-right:30px;" Bordered Striped Hover="true">
+                        <thead class="table-header">
+                            <MudTr>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800" Class="stops">Stops</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800" Class="type">Type</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Monday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Tuesday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Wednesday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Thursday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Friday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Saturday</MudTh>
+                                <MudTh Style=" padding:10px; text-align:center; font-weight:800">Sunday</MudTh>
+                            </MudTr>
+                        </thead>
+                        <tbody>
+                            @foreach (var row in rows)
+                            {
+                                <MudTr>
+                                    @foreach (var x in row.Split())
+                                    {
+                                        <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                    }
+                                </MudTr>
+                            }
+                        </tbody>
+                    </MudSimpleTable>
+                </MudItem>
+            </MudGrid>
+        </MudMainContent>
+    </MudLayout>
+</body>
+
+
+
+@code {
+    string[] headings = { "Stops", "Type", "Monday", "Tuesday", "Wednesday", "Thursday", "Friday", "Saturday", "Sunday" };
+    string[] rows =
+        {
+            @"LaCrosse Pick-up -- -- -- -- -- -- --",
+            @"Walmart Drop 6 8 6 4 -- -- --",
+            @"Kwik Drop 1 -- -- 2 -- 1 --",
+            @"Main Drop -- 3 -- 2 -- -- 4",
+            @"Central Drop -- -- 2 -- -- -- 7",
+            @"LaCrosse EOD -- -- -- -- -- -- --",
+            @"Rochester EOD -- -- -- -- -- -- --"
+    };
+    public int Route { get; set; }
+    public int DefaultStartTime { get; set; }
+
+    public class Location
+    {
+        public Location(string name)
+        {
+            Name = name;
+        }
+
+        public readonly string Name;
+
+        // Note: this is important so the MudSelect can compare pizzas
+        public override bool Equals(object o)
+        {
+            var other = o as Location;
+            return other?.Name == Name;
+        }
+
+        // Note: this is important too!
+        public override int GetHashCode() => Name?.GetHashCode() ?? 0;
+
+        // Implement this for the Pizza to display correctly in MudSelect
+        public override string ToString() => Name;
+    }
+    bool open = false;
+
+    void ToggleDrawer()
+    {
+        open = !open;
+    }
+}
