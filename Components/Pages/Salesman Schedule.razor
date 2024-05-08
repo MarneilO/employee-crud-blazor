@@ -1,100 +1,9 @@
-﻿@page "/driver-schedule"
+﻿@page "/salesman-schedule"
 @inherits LayoutComponentBase
 @using EmployeeWebServer.Data
 @inject EmployeeService employeesService
 
 <style>
-    .ring {
-        margin-top: 20%;
-        position: absolute;
-        top: 100%;
-        left: 50%;
-        transform: translate(-50%,-50%);
-        width: 200px;
-        height: 200px;
-        background: transparent;
-        border-radius: 50%;
-        text-align: center;
-        line-height: 2000px;
-        font-family: sans-serif;
-        font-size: 20px;
-        color: #006680;
-        letter-spacing: 4px;
-        text-transform: uppercase;
-        text-shadow: 0 0 10px #006680;
-        box-shadow: 0 0 20px #006680);
-    }
-
-        .ring:before {
-            content: '';
-            position: absolute;
-            top: -3px;
-            left: -3px;
-            width: 100%;
-            height: 100%;
-            border: 3px solid transparent;
-            border-top: 3px solid #006680;
-            border-right: 3px solid #006680;
-            border-radius: 50%;
-            animation: animateC 2s linear infinite;
-        }
-
-    .loading {
-        display: block;
-        position: absolute;
-        top: calc(50% - 2px);
-        left: 50%;
-        width: 50%;
-        height: 4px;
-        background: transparent;
-        transform-origin: left;
-        animation: animate 2s linear infinite;
-    }
-
-        .loading:before {
-            content: '';
-            position: absolute;
-            width: 16px;
-            height: 16px;
-            border-radius: 50%;
-            background: #006680;
-            top: -6px;
-            right: -8px;
-            box-shadow: 0 0 20px #006680;
-        }
-
-    @@keyframes animateC {
-        0% {
-            transform: rotate(0deg);
-        }
-
-        100% {
-            transform: rotate(360deg);
-        }
-    }
-
-    @@keyframes animate {
-        0% {
-            transform: rotate(45deg);
-        }
-
-        100% {
-            transform: rotate(405deg);
-        }
-    }
-    h3{
-        margin-top:20px;
-        font-weight:800;
-    }
-    .textfield{
-        width:300px;
-        display:flex;
-        flex-direction:row;
-        flex-wrap:wrap;
-        justify-content:center;
-        align-items:center;
-        padding:0;
-    }
     .table
     {
         border-color: white;
@@ -153,13 +62,13 @@
 <MudLayout>
     <MudAppBar Elevation="1" Class="NavBar">
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
-        <MudInputLabel>Driver's Schedule</MudInputLabel>
+        <MudInputLabel>Salesman Schedule</MudInputLabel>
         <MudSpacer />
         <MudIconButton Icon="@Icons.Material.Filled.Home" Href="/" Color="Color.Inherit" Target="_blank" />
         <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Target="_blank" />
     </MudAppBar><MudDrawer @bind-Open="@open" Elevation="1" Class="SideBar">
         <MudDrawerHeader>
-            <MudText Typo="Typo.h6">Driver's Schedule'</MudText>
+            <MudText Typo="Typo.h6">Salesman's Schedule'</MudText>
         </MudDrawerHeader>
         <MudNavMenu>
             <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
@@ -170,8 +79,8 @@
     </MudDrawer>
     <MudMainContent>
         <MudGrid Style="margin-left:12px 0px 0px 15px;">
-            <MudItem xs="3" Style="margin-left:12PX;">
-                <MudText Typo="Typo.h4">Driver's Schedule</MudText>
+            <MudItem xs="3" Style="margin-left:12px;">
+                <MudText Typo="Typo.h4">Salesman Schedule</MudText>
                 <MudTextField ShrinkLabel @bind-Value="Salesman" Label="Salesman" Variant="Variant.Filled"></MudTextField>
                 <MudTextField ShrinkLabel @bind-Value="GracePeriod" Label="Start Time" Variant="Variant.Filled"></MudTextField>
                 <MudTextField ShrinkLabel @bind-Value="StartTime" Label="Grace Period" Variant="Variant.Filled"></MudTextField>
@@ -344,54 +253,21 @@
 </MudLayout>
 
 @code {
-    List<Item> Items;
-
-    string[] headings = { "Start", "At First Drop", "Hour"};
+    string[] headings = { "Start", "At First Drop", "Hour" };
     string[] rows =
         {
-            @"Drop Walmart 1",
-            @"Drop Kwik 4",
-            @"Drop Main 6",
-            @"Drop Central 3",
+            @"Drop Walmart ",
+            @"Drop Kwik ",
+            @"Drop Main ",
+            @"Drop Central ",
+            @"Total ",
+            
     };
     public string Salesman { get; set; }
     public int StartTime { get; set; }
-    public int GracePeriod {get;  set;}
+    public int GracePeriod { get; set; }
 
-    public class Item
-    {
-        public string Day { get; set; }
-    }
 
-    public class SubItem
-    {
-        public string Action{ get; set; }
-        public string Location { get; set; }
-        public int Hour { get; set; }
-    }
-
-    public class Location
-    {
-        public Location(string name)
-        {
-            Name = name;
-        }
-
-        public readonly string Name;
-
-        // Note: this is important so the MudSelect can compare pizzas
-        public override bool Equals(object o)
-        {
-            var other = o as Location;
-            return other?.Name == Name;
-        }
-
-        // Note: this is important too!
-        public override int GetHashCode() => Name?.GetHashCode() ?? 0;
-
-        // Implement this for the Pizza to display correctly in MudSelect
-        public override string ToString() => Name;
-    }
     bool open = false;
 
     void ToggleDrawer()

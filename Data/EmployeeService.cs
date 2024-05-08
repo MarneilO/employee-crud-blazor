@@ -7,6 +7,8 @@ namespace EmployeeWebServer.Data
 {
     public class EmployeeService
     {
+        List<Employee> EmpObj;
+        List<Employee> _filteredEmployees = new();
         private readonly EmployeeDbContext _employeeDbContext;
         public EmployeeService(EmployeeDbContext employeeDbContext)
         {
@@ -49,6 +51,8 @@ namespace EmployeeWebServer.Data
             await _employeeDbContext.SaveChangesAsync();
             return true;
         }
+
+        
     }
     
 }

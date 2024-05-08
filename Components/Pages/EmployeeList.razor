@@ -1,5 +1,6 @@
 ﻿@page "/Employees"
 @inherits LayoutComponentBase
+@using EmployeeWebServer.Components.Layout
 @using EmployeeWebServer.Data
 @inject EmployeeService employeesService
 
@@ -19,7 +20,7 @@
         line-height: 2000px;
         font-family: sans-serif;
         font-size: 20px;
-        color: #006680;
+        color: #006680c;
         letter-spacing: 4px;
         text-transform: uppercase;
         text-shadow: 0 0 10px #006680;
@@ -205,9 +206,9 @@
         <MudIconButton Icon="@Icons.Material.Filled.Menu" Color="Color.Inherit" Edge="Edge.Start" OnClick="@ToggleDrawer" />
         <MudInputLabel>List of Employee</MudInputLabel>
         <MudSpacer />
-        <MudIconButton Icon="@Icons.Material.Filled.Home" Href="/" Color="Color.Inherit" Target="_blank" />
-        <MudIconButton Icon="@Icons.Material.Filled.PersonAdd" Href="/AddNewEmployee" Color="Color.Inherit" Target="_blank" />
-        <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit" Target="_blank" />
+        <MudIconButton Icon="@Icons.Material.Filled.Home" Href="/" Color="Color.Inherit"  />
+        <MudIconButton Icon="@Icons.Material.Filled.PersonAdd" Href="/AddNewEmployee" Color="Color.Inherit" />
+        <MudIconButton Icon="@Icons.Material.Filled.AccountCircle" Color="Color.Inherit"  />
     </MudAppBar>
     <MudDrawer @bind-Open="@open" Elevation="1" Class="SideBar">
         <MudDrawerHeader>
@@ -217,10 +218,12 @@
             <MudNavLink Match="NavLinkMatch.All" Href="/">Home</MudNavLink>
             <MudNavLink Match="NavLinkMatch.All" Href="/Employees">List Of Employee</MudNavLink>
             <MudNavLink Match="NavLinkMatch.All" Href="/driver-schedule">Driver's Schedule</MudNavLink>
+            <MudNavLink Match="NavLinkMatch.All" Href="/salesman-schedule">Salesman Schedule</MudNavLink>
         </MudNavMenu>
     </MudDrawer>
     <MudMainContent>
         <MudGrid>
+                    
             <MudItem xs="12">
                 @if (EmpObj is null)
                 {
@@ -231,6 +234,9 @@
                 }
                 else
                 {
+                    <div class="w-100">
+                        <SearchBox Items="EmpObj" OnSearch="UpdateFilteredEmployee"></SearchBox>
+                    </div>
                     <MudSimpleTable Style="overflow-x:auto" Bordered Striped Hover="true" Class="table-data">
                         <thead>
                             <MudTr>
@@ -273,12 +279,30 @@
 
 @code {
     List<Employee> EmpObj;
+    List<Employee> _filteredEmployees = new();
+    bool open = false;
 
     protected override async Task OnInitializedAsync()
     {
         EmpObj = await Task.Run(() => employeesService.GetAllEmployees());
+        _filteredEmployees = EmpObj.ToList();
+    } 
+
+     void UpdateFilteredEmployee(string searchTerm)
+    {
+        if (string.IsNullOrEmpty(searchTerm))
+        {
+            _filteredEmployees = EmpObj.ToList();
+        }
+        else
+        {
+            _filteredEmployees = EmpObj.Where(
+
+                employee => employee.FullName   .Contains(searchTerm, StringComparison.OrdinalIgnoreCase) ||
+                employee.Address.Contains(searchTerm, StringComparison.OrdinalIgnoreCase)
+                ).ToList();
+        }
     }
-    bool open = false;
 
     void ToggleDrawer()
     {

@@ -106,6 +106,9 @@
                         <MudButton Variant="Variant.Outlined" EndIcon="@Icons.Material.Filled.List" Color="Color.Primary" @onclick="@(() => Snackbar.Add("You can now view the list", Severity.Success))" Class="btn-home" Href="/Employees" Style="color:white; border:1px solid white;">View List</MudButton>
                     </div>
                     <div>
+                        <MudButton Variant="Variant.Outlined" EndIcon="@Icons.Material.Filled.Man" Color="Color.Primary" @onclick="@(() => Snackbar.Add("Driver Schedule", Severity.Success))" Class="btn-drivers-sched" Href="/salesman-schedule" Style="color:white; border:1px solid white;">Salesman Schedule</MudButton>
+                    </div>
+                    <div>
                         <MudButton Variant="Variant.Outlined" EndIcon="@Icons.Material.Filled.DirectionsCar" Color="Color.Primary" @onclick="@(() => Snackbar.Add("Driver Schedule", Severity.Success))" Class="btn-drivers-sched" Href="/driver-schedule" Style="color:white; border:1px solid white;">Driver's Schedule</MudButton>
                     </div>
                 </div>
