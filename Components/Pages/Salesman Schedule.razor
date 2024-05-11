@@ -77,176 +77,194 @@
             <MudNavLink Match="NavLinkMatch.All" Href="/salesman-schedule">Salesman Schedule</MudNavLink>
         </MudNavMenu>
     </MudDrawer>
+
     <MudMainContent>
-        <MudGrid Style="margin-left:12px 0px 0px 15px;">
-            <MudItem xs="3" Style="margin-left:12px;">
+        <MudGrid Style="padding:20px;">
+            <MudItem xs="3">
                 <MudText Typo="Typo.h4">Salesman Schedule</MudText>
-                <MudTextField ShrinkLabel @bind-Value="Salesman" Label="Salesman" Variant="Variant.Filled"></MudTextField>
+                <MudSelect T="string" Label="Salesman" AnchorOrigin="Origin.BottomCenter" Variant="Variant.Filled">
+                    <MudSelectItem Value="@("101 - MARNEIL")" />
+                    <MudSelectItem Value="@("102 - MARK")" />
+                    <MudSelectItem Value="@("103 - JOHN")" />
+                    <MudSelectItem Value="@("104 - REY")" />
+                    <MudSelectItem Value="@("105 - CHRIS")" />
+                    <MudSelectItem Value="@("106 - JUNEL")" />
+                </MudSelect>
                 <MudTextField ShrinkLabel @bind-Value="GracePeriod" Label="Start Time" Variant="Variant.Filled"></MudTextField>
                 <MudTextField ShrinkLabel @bind-Value="StartTime" Label="Grace Period" Variant="Variant.Filled"></MudTextField>
             </MudItem>
-            <MudItem xs="9"></MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Monday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+            <MudItem xs="9">
+                <MudGrid>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Monday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
+                                            <MudSelect Style=" padding:10px; text-align:center; font-weight:700" T="string" Label="At This Drop" AnchorOrigin="Origin.BottomCenter">
+                                                <MudSelectItem Value="@("La Crosse")" />
+                                                <MudSelectItem Value="@("Walmart")" />
+                                                <MudSelectItem Value="@("Kwik")" />
+                                                <MudSelectItem Value="@("Main")" />
+                                                <MudSelectItem Value="@("Central")" />
+                                                <MudSelectItem Value="@("Rochester")" />
+                                            </MudSelect>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Tuesday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Tuesday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Wednesday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Wednesday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Thursday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Start</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">At First Drop</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Thursday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Start</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">At First Drop</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Friday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Friday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
-            </MudItem>
-            <MudItem xs="4">
-                <MudCard>
-                    <MudCardContent>
-                        <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Saturday</MudText>
-                        <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
-                            <thead class="table-header">
-                                <MudTr>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
-                                    <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
-                                </MudTr>
-                            </thead>
-                            <tbody>
-                                @foreach (var row in rows)
-                                {
-                                    <MudTr>
-                                        @foreach (var x in row.Split())
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                    <MudItem xs="4">
+                        <MudCard>
+                            <MudCardContent>
+                                <MudText Typo="Typo.h6" Style="text-align:center; font-weight:800;">Saturday</MudText>
+                                <MudSimpleTable Style="overflow-x:auto;" Bordered Striped Hover="true">
+                                    <thead class="table-header">
+                                        <MudTr>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Action</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Location</MudTh>
+                                            <MudTh Style=" padding:10px; text-align:center; font-weight:700">Hour</MudTh>
+                                        </MudTr>
+                                    </thead>
+                                    <tbody>
+                                        @foreach (var row in rows)
                                         {
-                                            <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                            <MudTr>
+                                                @foreach (var x in row.Split())
+                                                {
+                                                    <MudTd Style=" padding:10px; text-align:center;">@x</MudTd>
+                                                }
+                                            </MudTr>
                                         }
-                                    </MudTr>
-                                }
-                            </tbody>
-                        </MudSimpleTable>
-                    </MudCardContent>
-                </MudCard>
+                                    </tbody>
+                                </MudSimpleTable>
+                            </MudCardContent>
+                        </MudCard>
+                    </MudItem>
+                </MudGrid>
             </MudItem>
         </MudGrid>
     </MudMainContent>

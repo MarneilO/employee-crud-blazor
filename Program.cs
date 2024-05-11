@@ -5,6 +5,7 @@ using EmployeeWebServer.Data;
 using Microsoft.EntityFrameworkCore;
 using MudBlazor;
 using MudBlazor.Services;
+using Syncfusion.Blazor;
 
 var builder = WebApplication.CreateBuilder(args);
 
@@ -14,6 +15,7 @@ builder.Services.AddRazorComponents()
 builder.Services.AddScoped<EmployeeService>();
 builder.Services.AddBlazorise();
 builder.Services.AddMudServices();
+builder.Services.AddSyncfusionBlazor();
 
 builder.Services.AddMudServices(config =>   
 {
